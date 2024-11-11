@@ -20,8 +20,7 @@ Staffifyr is a personnel management system built using Domain-Driven Design (DDD
 
 ### Building and running the Project
 
-1. Clone the repository:
-
+1. Clone the repository:  
 ``git clone https://github.com/bjablonsky/staffifyr.git``
 
 1. Open the Staffifyr.sln solution in Visual Studio from the src directory.
