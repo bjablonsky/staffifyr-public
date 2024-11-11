@@ -1,0 +1,39 @@
+﻿@page "/staff"
+@using Microsoft.AspNetCore.Components.QuickGrid
+@inject PersonnelApiClient PersonnelApi
+
+<PageTitle>Staff</PageTitle>
+
+<h1>Staff</h1>
+
+@if (staff is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <QuickGrid Class="table" Items="staff">
+        <TemplateColumn Title="Name">
+            <span><a href="/personnel/@context.Id">@context.Name</a></span>
+        </TemplateColumn>
+        <TemplateColumn Title="Address">
+            <span>
+                @context.Street, @context.City, @context.State @context.PostalCode @context.Country
+            </span>
+        </TemplateColumn>
+        <PropertyColumn Title="Email" Property="staff => staff.EmailAddress" />
+        <PropertyColumn Title="Phone" Property="staff => staff.PhoneNumber" />
+        <PropertyColumn Title="Age" Property="staff => staff.Age" />
+
+    </QuickGrid>
+}
+
+@code {
+    IQueryable<PersonnelDto>? staff;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var personnelList = await PersonnelApi.GetAllPersonnelAsync();
+        staff = personnelList.AsQueryable();
+    }
+}
